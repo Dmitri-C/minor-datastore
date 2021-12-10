@@ -1,4 +1,5 @@
 
 
 all:
-	gcc main.cpp -lstdc++ -o program
+	
+	g++ -Wall -I/usr/include/cppconn -o program main.cpp -L/usr/lib -lmysqlcppconn
