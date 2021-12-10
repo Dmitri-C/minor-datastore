@@ -50,6 +50,17 @@ try {
   driver = get_driver_instance();
   con = driver->connect("tcp://127.0.0.1:3306", "root", "root");
   cout << con->isValid() << endl;
+  con->setSchema("my_db");
+
+  sql::Statement *stmt;
+
+  stmt = con->createStatement();
+  stmt->execute("USE my_db");
+  stmt->execute("DROP TABLE IF EXISTS test2");
+  stmt->execute("CREATE TABLE test2(id INT, label CHAR(1))");
+  stmt->execute("INSERT INTO test2(id, label) VALUES (1, 'a')");
+
+  delete stmt;
   delete con;
 
 } catch (sql::SQLException &e) {
