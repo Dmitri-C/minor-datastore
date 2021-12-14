@@ -10,3 +10,5 @@ FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 RUN apt-get update && apt-get install libboost-all-dev -y;
 
 RUN apt-get update && apt-get install libmysqlcppconn-dev -y;
+
+RUN apt-get update && apt-get install libjsoncpp-dev

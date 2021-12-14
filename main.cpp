@@ -34,45 +34,56 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
+#include <iostream>
+#include <fstream>
+#include <jsoncpp/json/json.h>
 
 using namespace std;
 
 int main(void)
 {
-std::cout << endl;
-std::cout << "Running 'SELECT 'Hello World!' » AS _message'..." << std::endl;
+  std::cout << endl;
+  std::cout << "Running 'SELECT 'Hello World!' » AS _message'..." << std::endl;
 
-try {
-  sql::Driver *driver;
-  sql::Connection *con;
+  ifstream ifs("dbconfig.json");
+  Json::Reader reader;
+  Json::Value obj;
+  reader.parse(ifs, obj);
+  std::cout << "test1: " << obj["test1"].asString() << std::endl;
 
-  /* Create a connection */
-  driver = get_driver_instance();
-  con = driver->connect("tcp://127.0.0.1:3306", "root", "root");
-  cout << con->isValid() << endl;
-  con->setSchema("my_db");
 
-  sql::Statement *stmt;
 
-  stmt = con->createStatement();
-  stmt->execute("USE my_db");
-  stmt->execute("DROP TABLE IF EXISTS test2");
-  stmt->execute("CREATE TABLE test2(id INT, label CHAR(1))");
-  stmt->execute("INSERT INTO test2(id, label) VALUES (1, 'a')");
+  try {
+    sql::Driver *driver;
+    sql::Connection *con;
 
-  delete stmt;
-  delete con;
+    /* Create a connection */
+    driver = get_driver_instance();
+    con = driver->connect("tcp://127.0.0.1:3306", "root", "root");
+    cout << con->isValid() << endl;
+    con->setSchema("my_db");
 
-} catch (sql::SQLException &e) {
-  cout << "# ERR: SQLException in " << __FILE__;
-  cout << "# ERR: " << e.what();
-  cout << " (MySQL error code: " << e.getErrorCode();
-  cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-}
+    sql::Statement *stmt;
 
-cout << endl;
+    stmt = con->createStatement();
+    stmt->execute("USE my_db");
+    stmt->execute("DROP TABLE IF EXISTS test2");
+    stmt->execute("CREATE TABLE test2(id INT, label CHAR(1))");
+    stmt->execute("INSERT INTO test2(id, label) VALUES (1, 'a')");
 
-return EXIT_SUCCESS;
+    delete stmt;
+    delete con;
+
+  } catch (sql::SQLException &e) {
+    cout << "# ERR: SQLException in " << __FILE__;
+    cout << "# ERR: " << e.what();
+    cout << " (MySQL error code: " << e.getErrorCode();
+    cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+  }
+
+  cout << endl;
+
+  return EXIT_SUCCESS;
 }
 
 //gcc main.cpp -L/usr/lib -lstdc++ -o program
