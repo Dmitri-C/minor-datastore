@@ -24,6 +24,10 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+#build results
+program
+test
+
 #vscode workspace settings
 src/data_log_api.code-workspace
 
