@@ -1,5 +1,5 @@
 /* Standard C++ includes */
-#include "../include/data_output.hpp"
+#include "../include/dataoutput.hpp"
 
 using namespace std;
 
