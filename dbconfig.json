@@ -1,4 +1,17 @@
 {
-    "test1":"amritpal",
-    "test2":"v2"
+    "settings" : {
+        "database_output" : "true",
+        "csv_output" : "true",
+        "pogram_name" : "data_storage_api",
+        "author" : "dmitri creutzburg"
+    },
+    "log_table" : {
+        "log_type" : "string",
+        "log_data" : "data"
+    },
+    "output_table_1" : {
+        "device_name" : "string",
+        "robot_name" : "string",
+        "distance" : "int"
+    }
 }

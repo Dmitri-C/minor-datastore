@@ -3,8 +3,6 @@
 using namespace std;
 
 
-
-
 int main(void)
 {
     run_test_configreader();
