@@ -6,6 +6,9 @@ The program will also have an option to write to a file so it can be easily used
 This program has four components:
 
 1: the database connection
+
 2: the config reader
+
 3: the file connection
+
 4: the api acces
